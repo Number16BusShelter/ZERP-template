@@ -1,0 +1,36 @@
+{
+  "name": "@zerp/utils",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Common utils",
+  "main": "bin/index.js",
+  "types": "bin/index.d.ts",
+  "files": [
+    "./bin",
+    "./dist",
+    "./build"
+  ],
+  "engines": {
+    "node": ">=18.20.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w",
+    "dev2": "env $(cat ../../cicd/environment/.env | xargs) ts-node index.ts -w -i logs,tmp",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@zerp/types": "workspace:*",
+    "axios": "^1.6.8",
+    "colors": "^1.4.0",
+    "date-fns": "^3.6.0",
+    "eventemitter2": "^6.4.9",
+    "moment": "^2.30.1",
+    "short-uuid": "^4.2.2",
+    "uuid": "^9.0.1",
+    "winston": "^3.13.0"
+  },
+  "keywords": [],
+  "author": "Number16BusShelter",
+  "license": "ISC"
+}

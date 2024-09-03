@@ -1,0 +1,28 @@
+{
+  "name": "@zerp/global-configs",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Global configurations",
+  "main": "bin/index.js",
+  "types": "bin/index.d.ts",
+  "files": [
+    "./bin",
+    "./dist",
+    "./build"
+  ],
+  "engines": {
+    "node": ">=18.20.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@zerp/types": "workspace:*"
+  },
+  "keywords": [],
+  "author": "Number16BusShelter",
+  "license": "ISC",
+  "devDependencies": {}
+}

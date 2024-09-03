@@ -1,0 +1,24 @@
+{
+  "name": "@zerp/errors",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Shared errors namespace",
+  "main": "bin/index.js",
+  "types": "bin/index.d.ts",
+  "files": [
+    "./bin",
+    "./dist",
+    "./build"
+  ],
+  "engines": {
+    "node": ">=18.20.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Number16BusShelter",
+  "license": "ISC"
+}

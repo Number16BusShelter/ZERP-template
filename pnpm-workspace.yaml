@@ -1,0 +1,12 @@
+packages:
+    - packages/types
+    - packages/errors
+    - packages/utils
+    - packages/db
+    - packages/global-configs
+    - packages/shared-modules
+    - services/api
+    - services/tgbot
+    - services/worker
+    - services/client
+

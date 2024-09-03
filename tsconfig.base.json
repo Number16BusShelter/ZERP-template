@@ -1,0 +1,129 @@
+{
+  "extends": "@tsconfig/node18/tsconfig.json",
+  "display": "Node 18",
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "definitions": true,
+  "ts-node": {
+    "swc": true,
+  },
+  "compilerOptions": {
+    "target": "ES2021",
+    "moduleResolution": "NodeNext",
+    "module": "NodeNext",
+    "types": [
+      "node",
+      "mocha",
+      "chai"
+    ],
+    "lib": [
+      "es2020",
+      "es2021",
+      "es2022",
+      "esnext"
+    ],
+    "declaration": true,
+    "sourceMap": true,
+    "strict": true,
+    "allowJs": true,
+    "checkJs": false,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "preserveWatchOutput": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "strictPropertyInitialization": false,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "resolveJsonModule": true,
+    "preserveSymlinks": false,
+    "paths": {
+      "@zerp/types": [
+        "./packages/types"
+      ],
+      "@zerp/errors": [
+        "./packages/errors"
+      ],
+      "@zerp/utils": [
+        "./packages/utils"
+      ],
+      "@zerp/global-configs": [
+        "./packages/global-configs"
+      ],
+      "@zerp/db": [
+        "./packages/db"
+      ],
+      "@zerp/shared-modules": [
+        "./packages/shared-modules"
+      ],
+      "@zerp/api": [
+        "./services/api"
+      ],
+      "@zerp/worker": [
+        "./services/worker"
+      ],
+      "@zerp/client": [
+        "./services/client",
+      ]
+    }
+  },
+  "typeRoots": [
+    "./**/node_modules/@type",
+    "./**/node_modules/**/types",
+    "./**/*.d.ts"
+  ],
+  "references": [
+    {
+      "path": "packages/errors"
+    },
+    {
+      "path": "packages/types"
+    },
+    {
+      "path": "packages/utils"
+    },
+    {
+      "path": "packages/global-configs"
+    },
+    {
+      "path": "packages/db"
+    },
+    {
+      "path": "packages/shared-modules"
+    },
+    {
+      "path": "services/api"
+    },
+    {
+      "path": "services/worker"
+    },
+    {
+      "path": "services/client",
+    }
+  ],
+  "exclude": [
+    "./**/.template*/**/*",
+    "./infra",
+    "./cicd",
+    "./.*",
+    "./lib",
+    "**/tmp/**",
+    "**/logs/**",
+    "./cicd/.docker",
+    "./.misc",
+    "./scripts",
+    "node_modules",
+    "dist",
+    "bin",
+    "build",
+    "./**/dist/**",
+    "./**/bin/**",
+    "./**/build/**",
+    "./**/__mocks__*",
+    "**/*.spec.**",
+    "test*",
+    "assets"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "timeout": 60000,
+  "extension": ["js", "ts"],
+  "ui": "bdd",
+  "reporter": "spec",
+  "spec": ["{services,packages}/**/*.test.ts"],
+  "exit": true
+}

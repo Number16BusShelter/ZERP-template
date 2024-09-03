@@ -1,0 +1,36 @@
+{
+  "name": "@zerp/<service-name>",
+  "version": "0.0.1",
+  "private": true,
+  "description": "ZERP API service.",
+  "engines": {
+    "node": ">=18.20.0"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "./bin",
+    "./dist",
+    "./build"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "pnpm run start:local",
+    "dev": "nodemon --watch src --exec \"ts-node -r tsconfig-paths/register index.ts\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:local": "ts-node -r tsconfig-paths/register  index.ts",
+    "start:prod": "node ./dist/index.js"
+  },
+  "author": "Number16BusShelter",
+  "license": "ISC",
+  "keywords": [],
+  "dependencies": {
+    "@zerp/db": "workspace:*",
+    "@zerp/errors": "workspace:*",
+    "@zerp/global-configs": "workspace:*",
+    "@zerp/shared-modules": "workspace:*",
+    "@zerp/types": "workspace:*",
+    "@zerp/utils": "workspace:*"
+  },
+  "devDependencies": {}
+}
