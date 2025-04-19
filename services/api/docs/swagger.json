@@ -9,7 +9,7 @@
       "email": ""
     }
   },
-  "host": "example.com",
+  "host": "localhost:7070",
   "basePath": "/",
   "externalDocs": {
     "description": "View the raw OpenAPI Specification in JSON format",

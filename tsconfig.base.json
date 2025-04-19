@@ -61,7 +61,7 @@
       "@zerp/zod-schemas": [
         "./packages/zod-schemas"
       ],
-      "@zerp/sdk/api": [
+      "@zerp/sdk-api": [
         "./packages/sdk/api"
       ],
       "@zerp/api": [

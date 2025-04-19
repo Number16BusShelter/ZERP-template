@@ -14,7 +14,7 @@
     "./build"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && tsc-alias",
     "start": "ts-node -r tsconfig-paths/register index.ts",
     "dev": "nodemon --watch src --exec \"ts-node -r tsconfig-paths/register index.ts\"",
     "test": "mocha --esm -r ts-node/register ./tests",
@@ -23,7 +23,7 @@
     "start:prod": "node ./dist/index.js",
     "cli": "ts-node -r tsconfig-paths/register ./src/scripts/run-script.ts",
     "generate-swagger": "ts-node -r tsconfig-paths/register src/scripts/generate-swagger.ts",
-    "generate-sdk": "pnpm generate-swagger && swagger-codegen generate -l typescript-axios -i ./docs/swagger.json -o ../../packages/sdk/api",
+    "generate-sdk": "pnpm generate-swagger && swagger-codegen generate -l typescript-axios -i ./docs/swagger.json -o ../../packages/sdk-api",
     "generate-api-token": "ts-node -r tsconfig-paths/register ./src/scripts/generate-api-token.ts",
     "typeorm": "pnpm run --filter @zerp/db typeorm",
     "script:migrate": "node ./d   ist/src/scripts/migrate.js",
@@ -49,7 +49,6 @@
     "@zerp/db": "workspace:*",
     "@zerp/errors": "workspace:*",
     "@zerp/global-configs": "workspace:*",
-    "@zerp/sdk/api": "workspace:*",
     "@zerp/shared-modules": "workspace:*",
     "@zerp/types": "workspace:*",
     "@zerp/utils": "workspace:*",

@@ -1,7 +1,7 @@
 import { Router } from "express";
 import config from "../../../../config";
 import { generatePayload } from "./payload";
-import { validateTWAUser } from "@zerp/shared-modules/src";
+import { validateTWAUser } from "@zerp/shared-modules";
 import { validateTonConnect, WalletConfig } from "@/src/modules/TonConnect/signatureVerify";
 import {
     AddressesController,

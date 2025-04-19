@@ -1,5 +1,5 @@
 import { app as appConfig } from "@zerp/global-configs";
-import { AuthApi } from "@zerp/sdk/api";
+import { AuthApi } from "@zerp/sdk-api";
 import { expect } from "chai";
 
 describe("API SDK test", async () => {

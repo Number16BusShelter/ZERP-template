@@ -6,7 +6,7 @@ packages:
     - packages/global-configs
     - packages/shared-modules
     - packages/zod-schemas
-    - packages/sdk/api
+    - packages/sdk-api
     - services/api
     - services/tgbot
     - services/worker

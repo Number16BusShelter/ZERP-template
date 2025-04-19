@@ -1,6 +1,5 @@
 import colors from "colors";
-import { format } from "date-fns";
-
+import moment from "moment";
 
 function resSerializer(res) {
     return {
@@ -33,7 +32,7 @@ export function randomColorFromString(str: string,  colorsArray = [
     return colorsArray[(str.length % colorsArray.length)](str)
 }
 
-export const logTime = (time = new Date()) => format(new Date(time), "yyyy-MM-dd HH:mm:ss");
+export const logTime = (time = new Date()) => moment(new Date(time)).format("YYYY-MM-DD HH:mm:ss");
 
 export const fxFromLevel = (level) => {
     switch (level.toUpperCase()) {
