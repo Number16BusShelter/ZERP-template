@@ -1,4 +1,4 @@
-import {TonConnectSessions} from "@/entities";
+import {TonConnectSessions} from "../../entities/Telegram";
 import AppDataSource from "../../data-source";
 import {BaseCRUDController} from "../abstract";
 

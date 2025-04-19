@@ -1,5 +1,5 @@
-import {BaseCRUDController} from "../abstract";
-import {Addresses} from "@/entities";
+import { BaseCRUDController } from "../abstract";
+import { Addresses } from "./../../entities/Chains/Addresses";
 
 export class AddressesController extends BaseCRUDController<Addresses> {
     constructor() {

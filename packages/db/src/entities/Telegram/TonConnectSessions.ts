@@ -1,5 +1,6 @@
 import {
-    Column, CreateDateColumn,
+    Column,
+    CreateDateColumn,
     Entity,
     Index,
     JoinColumn,
@@ -7,7 +8,7 @@ import {
     PrimaryColumn,
     Unique, UpdateDateColumn,
 } from "typeorm";
-import { Users } from "@/entities/System";
+import { Users } from "../System";
 
 @Index("ton_connect_sessions_pkey", ["userId"], { unique: true })
 @Unique("ton_connect_sessions__user_id__key_qkey", ["userId", "key"])

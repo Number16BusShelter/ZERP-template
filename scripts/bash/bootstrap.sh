@@ -2,7 +2,7 @@
 
 # Check if nvm is installed
 if command -v nvm &> /dev/null; then
-    nvm use 18.20
+    nvm use 20.18
 fi
 
 # Check if pnpm is installed

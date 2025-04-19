@@ -1,7 +1,7 @@
 import { generateRandomString } from "@zerp/utils";
 import { app as appConfig, rules } from "@zerp/global-configs"
 
-const manifestHost = rules.REQ('MANIFEST_HOST')
+const manifestHost = process.env.MANIFEST_URL || rules.REQ('MANIFEST_URL')
 
 export default {
     secret: process.env.TON_CONNECT_SECRET || process.env.SESSION_SECRET || generateRandomString(32),

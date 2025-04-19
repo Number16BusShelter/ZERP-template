@@ -1,5 +1,3 @@
-import { IsNotEmpty, IsString } from "class-validator";
-
 // https://core.telegram.org/bots/webapps
 
 export class L1WebAppInitParams {

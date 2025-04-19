@@ -5,7 +5,7 @@ import { BullBoardConfig } from "@zerp/types";
 import { AppLogger, unwrapMapMember } from "@zerp/utils";
 
 import { JobSetup, jobs } from "./handlers";
-import { QueueOptions } from "bullmq/dist/esm/interfaces";
+import { JobSchedulerJson, QueueOptions } from "bullmq/dist/esm/interfaces";
 
 export interface BullConfig {
     defaultOptions: QueueOptions;
@@ -188,27 +188,6 @@ export default class BullModule {
         };
     }
 
-    /**
-     * Initializes repeating jobs in the queue.
-     * @returns {Promise<void>}
-     */
-    private async initializeRepeatingJobs(): Promise<void> {
-        for (const task of Object.values(this.tasks)) {
-            if (!!task.options?.repeat) {
-                await BullModule.addTask(task, this.queue);
-                this.logger.info(`[+] Added repeating task "${task.name}"`);
-            }
-        }
-    }
-
-    /**
-     * Resets all repeating jobs in the queue.
-     * @returns {Promise<void>}
-     */
-    public async resetRepeatingJobs(): Promise<void> {
-        await this.removeAllRepeatableJobs();
-        await this.initializeRepeatingJobs();
-    }
 
     /**
      * Lists all jobs in the queue.
@@ -222,8 +201,10 @@ export default class BullModule {
      * Lists all repeatable jobs in the queue.
      * @returns {Promise<any[]>} List of repeatable jobs.
      */
-    public async listRepeatableJobs(): Promise<any[]> {
-        return this.queue.getRepeatableJobs();
+    public async listRepeatableJobSchedulers(): Promise<JobSchedulerJson[]> {
+        const schedulers = await this.queue.getJobSchedulers(0, 10000000000000);
+        console.log("Current job schedulers:", schedulers);
+        return schedulers;
     }
 
     /**
@@ -241,17 +222,37 @@ export default class BullModule {
     public async removeAllJobs(): Promise<void> {
         const jobs = await this.listJobs();
         for (const job of jobs) {
-            await job.remove();
+            try {
+                await job.remove();
+            } catch (err: any) {
+                this.logger.error(`Error occurred while removing job "${job.id}":\n${err.message}\n${err.stack}`);
+            }
         }
     }
 
     /**
-     * Removes specific repeatable jobs from the queue.
-     * @param {Array<{ name: string, options: any }>} jobs - Array of jobs to remove.
-     * @returns {Promise<any[]>} Result of job removals.
+     * Initializes repeating jobs in the queue.
+     * @returns {Promise<void>}
      */
-    public async removeRepeatableJobs(jobs: { name: string, options: any }[]): Promise<any[]> {
-        return Promise.all(jobs.map(job => this.queue.removeRepeatable(job.name, job.options)));
+    private async initializeRepeatingJobs(): Promise<void> {
+        for (const task of Object.values(this.tasks)) {
+            if (!!task.options?.repeat) {
+                await this.queue.upsertJobScheduler(
+                    task.name, task.options.repeat, task,
+                );
+                this.logger.info(`[+] Added repeating task "${task.name}"`);
+            }
+        }
+    }
+
+    /**
+     * Resets all repeating jobs in the queue.
+     * @returns {Promise<void>}
+     */
+    public async resetRepeatingJobs(): Promise<void> {
+        await this.removeAllRepeatableJobs();
+        await this.initializeRepeatingJobs();
+        await this.listRepeatableJobSchedulers();
     }
 
     /**
@@ -260,7 +261,7 @@ export default class BullModule {
      * @returns {Promise<any[]>} Result of job removals.
      */
     public async removeRepeatableJobsByKey(keys: string[]): Promise<any[]> {
-        return Promise.all(keys.map(key => this.queue.removeRepeatableByKey(key)));
+        return Promise.all(keys.map(key => this.queue.removeJobScheduler(key)));
     }
 
     /**
@@ -268,8 +269,8 @@ export default class BullModule {
      * @returns {Promise<any[]>} Result of job removals.
      */
     public async removeAllRepeatableJobs(): Promise<any[]> {
-        const repeatableJobs = await this.listRepeatableJobs();
-        return this.removeRepeatableJobsByKey(repeatableJobs.map(rj => rj.key));
+        const repeatableJobSchedulers = await this.listRepeatableJobSchedulers();
+        return this.removeRepeatableJobsByKey(repeatableJobSchedulers.map(rj => rj.key));
     }
 
     /**
@@ -278,8 +279,8 @@ export default class BullModule {
      */
     public async cleanQueue(): Promise<void> {
         await this.drainQueue();
-        await this.removeAllJobs();
         await this.removeAllRepeatableJobs();
+        await this.removeAllJobs();
     }
 
     /**
@@ -294,8 +295,9 @@ export default class BullModule {
      * Stops the worker.
      * @returns {Promise<void>}
      */
-    public stop(): Promise<void> {
-        return this.worker.close();
+    public async stop(): Promise<void> {
+        await this.worker.close();
+        await this.worker.disconnect();
     }
 }
 

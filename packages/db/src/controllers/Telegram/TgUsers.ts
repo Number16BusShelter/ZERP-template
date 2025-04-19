@@ -1,7 +1,7 @@
 import { BadRequest } from "@zerp/errors";
 import { isNumeric } from "@zerp/utils";
 import AppDataSource from "../../data-source";
-import { TgUsers } from "@/entities";
+import { TgUsers } from "../../entities/Telegram/TgUsers";
 import { BaseCRUDController } from "../abstract";
 import { UsersController } from "../System";
 

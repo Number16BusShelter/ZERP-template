@@ -1,2 +1,2 @@
-export * from "@/modules/bull/handlers/scripts/.example"
+export * from "./example"
 

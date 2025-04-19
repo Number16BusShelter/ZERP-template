@@ -1,10 +1,10 @@
 {
-  "extends": "@tsconfig/node18/tsconfig.json",
-  "display": "Node 18",
+  "extends": "@tsconfig/node20/tsconfig.json",
+  "display": "Node 20",
   "$schema": "https://json.schemastore.org/tsconfig",
   "definitions": true,
   "ts-node": {
-    "swc": true,
+    "swc": true
   },
   "compilerOptions": {
     "target": "ES2021",
@@ -58,6 +58,12 @@
       "@zerp/shared-modules": [
         "./packages/shared-modules"
       ],
+      "@zerp/zod-schemas": [
+        "./packages/zod-schemas"
+      ],
+      "@zerp/sdk/api": [
+        "./packages/sdk/api"
+      ],
       "@zerp/api": [
         "./services/api"
       ],
@@ -65,7 +71,7 @@
         "./services/worker"
       ],
       "@zerp/client": [
-        "./services/client",
+        "./services/client"
       ]
     }
   },
@@ -76,10 +82,10 @@
   ],
   "references": [
     {
-      "path": "packages/errors"
+      "path": "packages/types"
     },
     {
-      "path": "packages/types"
+      "path": "packages/errors"
     },
     {
       "path": "packages/utils"
@@ -94,13 +100,19 @@
       "path": "packages/shared-modules"
     },
     {
+      "path": "packages/xod-schemas"
+    },
+    {
+      "path": "packages/sdk/api"
+    },
+    {
       "path": "services/api"
     },
     {
       "path": "services/worker"
     },
     {
-      "path": "services/client",
+      "path": "services/client"
     }
   ],
   "exclude": [

@@ -1,6 +1,7 @@
 import { createHmac, randomBytes } from "crypto";
 import { CryptoOptions, SecretTokenTransport } from "@zerp/types";
-import { passwords as passwordsDefaultConfigs } from "../../../config";
+import { passwords as passwordsDefaultConfigs } from "@/config";
+
 
 export default class Passworder {
     constructor(private readonly options: CryptoOptions = passwordsDefaultConfigs) {}

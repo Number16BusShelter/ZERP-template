@@ -1,5 +1,6 @@
 import { BaseCRUDController } from "../abstract";
-import { Addresses, Users } from "@/entities";
+import { Addresses } from "../../entities/Chains/Addresses";
+import { Users } from "../../entities/System/Users";
 import { checkUUID, isNumeric } from "@zerp/utils";
 
 

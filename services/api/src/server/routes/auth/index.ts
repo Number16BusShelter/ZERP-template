@@ -1,17 +1,19 @@
 import { Router } from "express";
-import twaRoutes from "./twa";
-import twa2Routes from "./twa2";
-
-import { authenticateJWT, issueJWTToken } from "./passport";
-import { Unauthenticated } from "@zerp/errors";
-import { Users } from "@zerp/db";
 import { plainToInstance } from "class-transformer";
-import { asyncErrorHandler } from "@/src/server/common/http-handlers/handlers";
+
+import { Users } from "@zerp/db";
+import { Unauthenticated } from "@zerp/errors";
+import { authenticateJWT, issueJWTToken, asyncErrorHandler } from "@zerp/shared-modules";
+
+// import twaRoutes from "./twa/twa";
+// import twa2Routes from "./twa/twa2";
+import registerRoutes from "./register/register.route"
 
 const router = Router();
 
-router.use("/twa", twaRoutes);
-router.use("/twa2", twa2Routes);
+// router.use("/twa", twaRoutes);
+// router.use("/twa2", twa2Routes);
+router.use("/register", registerRoutes)
 
 router.get("/check",
     authenticateJWT,

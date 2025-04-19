@@ -3,6 +3,9 @@
   "extension": ["js", "ts"],
   "ui": "bdd",
   "reporter": "spec",
-  "spec": ["{services,packages}/**/*.test.ts"],
+  "spec": [
+    "{services,packages}/**/*.test.ts",
+    "{services,packages}/**/*.spec.ts"
+  ],
   "exit": true
 }

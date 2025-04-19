@@ -11,11 +11,14 @@
       ]
     }
   },
+  "paths": {
+    "@zerp/db/*": "./src/*"
+  },
+  "include": [
+    "./src"
+  ],
   "exclude": [
     "./**/xclone",
     "./bin"
-  ],
-  "include": [
-    "./src"
   ]
 }

@@ -11,16 +11,16 @@
     "./build"
   ],
   "engines": {
-    "node": ">=18.20.0"
+    "node": ">=20.18"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && tsc-alias",
     "dev": "tsc -w",
     "test": "echo \"Error: no test specified\" && exit 1",
     "typeorm": "typeorm-ts-node-commonjs -d $(if test -f \"src/data-source.ts\"; then\n    echo \"src/data-source.ts\"\nelse\n  echo \"bin/data-source.js\"\nfi)",
     "orm:models:generate": "npx typeorm-model-generator -h ${POSTGRES_HOST} -d ${POSTGRES_DB} -u ${POSTGRES_USER} -x ${POSTGRES_PASSWORD} -e postgres -o ./xclone",
-    "orm:migrations:generate": "pnpm run typeorm migration:generate src/migration/RLZ",
-    "orm:migrations:create": "pnpm run typeorm migration:create src/migration/RLZ",
+    "orm:migrations:generate": "pnpm run typeorm migration:generate src/migration/ZRP",
+    "orm:migrations:create": "pnpm run typeorm migration:create src/migration/ZRP",
     "orm:migrations:revert": "pnpm run typeorm migration:revert",
     "orm:migrations:run": "pnpm run typeorm migration:run",
     "orm-js:migrations:run": "typeorm -d ./bin/data-source.js migration:run",
@@ -28,21 +28,22 @@
     "orm:local:run": "typeorm -d ./bin/data-source.js migration:run"
   },
   "dependencies": {
-    "@asteasolutions/zod-to-openapi": "^7.1.1",
+    "@asteasolutions/zod-to-openapi": "^7.3.0",
     "@zerp/errors": "workspace:*",
-    "@zerp/global-configs": "workspace:*",
-    "@zerp/types": "workspace:*",
     "@zerp/utils": "workspace:*",
+    "@zerp/types": "workspace:*",
+    "@zerp/global-configs": "workspace:*",
+    "decimal.js": "^10.5.0",
     "moment": "^2.30.1",
-    "pg": "^8.11.3",
+    "pg": "^8.14.1",
     "pg-hstore": "^2.3.4",
     "reflect-metadata": "^0.2.2",
-    "typeorm": "^0.3.20",
-    "uuid": "^9.0.1",
-    "zod": "^3.23.8"
+    "typeorm": "^0.3.22",
+    "uuid": "^11.1.0",
+    "zod": "^3.24.3"
   },
   "devDependencies": {
-    "@types/pg": "~8.11.5"
+    "@types/pg": "~8.11.13"
   },
   "keywords": [],
   "author": "Number16BusShelter",

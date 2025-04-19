@@ -1,0 +1,27 @@
+{
+  "name": "@zerp/zod-schemas",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Shared schemas for Zod",
+  "main": "bin/index.js",
+  "types": "bin/index.d.ts",
+  "files": [
+    "./bin",
+    "./dist",
+    "./build"
+  ],
+  "engines": {
+    "node": ">=20.18"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@asteasolutions/zod-to-openapi": "^7.3.0",
+    "@zerp/types": "workspace:*",
+    "zod": "^3.24.3"
+  },
+  "keywords": [],
+  "author": "Number16BusShelter",
+  "license": "ISC"
+}

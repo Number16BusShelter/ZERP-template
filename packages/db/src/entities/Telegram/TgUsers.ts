@@ -7,12 +7,13 @@ import {
     OneToMany, CreateDateColumn, UpdateDateColumn, OneToOne, ManyToOne,
 } from "typeorm";
 import config from "@zerp/global-configs";
-import { TgChats, TgMessages } from "@/entities";
+import { TgMessages } from "./TgMessages";
+import { TgChats } from "./TgChats";
 
 import { Users } from "../System";
 
 @Index("tg_users_pkey", ["id"], { unique: true })
-@Index("idx_tg_users_user_id", ['userId'])
+@Index("idx_tg_users_user_id", ["userId"])
 @Entity("tg_users", { schema: "public" })
 export class TgUsers {
     @Column({

@@ -4,10 +4,13 @@ import cors from "cors";
 import express from "express";
 import compression from "compression";
 
-import { app, logging } from "@zerp/global-configs";
+import { app, logging, server as serverConfig } from "@zerp/global-configs";
 import { AppLogger, createLogger } from "@zerp/utils";
 import { AppConfig } from "@zerp/types";
 
+// Setting global variables
+import { globalRegistry, hidePath, reportError } from "./common";
+import { generateDocsRouter } from "./routes/common/docs";
 export const defaultLogger: AppLogger = createLogger({
     ...logging,
     name: app.name,
@@ -15,11 +18,14 @@ export const defaultLogger: AppLogger = createLogger({
     subModule: "api",
 });
 
+global.globalRegistry = globalRegistry;
+global.logger = globalRegistry;
+
 function createBasicHttpServer(serverConfig: AppConfig, logger: AppLogger) {
 // Classic Rest API server
     const app: express.Application = express();
 
-    app.disable('x-powered-by');
+    app.disable("x-powered-by");
 
 // WS server
 // const _app: express.Application = express();
@@ -34,8 +40,8 @@ function createBasicHttpServer(serverConfig: AppConfig, logger: AppLogger) {
     app.use(iCors);
     app.use(express.json());
 
-    app.options("*", iCors);
-    app.all("*", function(req, res, next) {
+    app.options(/(.*)/, iCors);
+    app.all(/(.*)/, function(req, res, next) {
         try {
             let originHost;
             try {
@@ -74,6 +80,8 @@ function createBasicHttpServer(serverConfig: AppConfig, logger: AppLogger) {
         res.send("ok");
     });
 
+    app.use(reportError as express.ErrorRequestHandler);
+
     return app;
 }
 
@@ -84,6 +92,14 @@ const host = "0.0.0.0";
 let server: http.Server;
 
 const startServer = async (expressApplication: express.Application, logger: AppLogger = defaultLogger): Promise<http.Server> => {
+    // Adding documentation
+    const docsPath = hidePath("/docs", serverConfig.secretRoute);
+    expressApplication.use(docsPath, generateDocsRouter());
+
+    logger.warn(`[?] Swagger UI has started http://0.0.0.0:${app.port}${docsPath}`);
+
+    expressApplication.use(reportError as express.ErrorRequestHandler);
+
     logger.info(`> Starting Express HTTP server...`);
     server = expressApplication.listen(port, host, () => {
         logger.info(`Listening on host ${host} and port ${port} ...`);

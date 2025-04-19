@@ -1,0 +1,15 @@
+{
+  "timeout": 60000,
+  "loader": "ts-node/esm",
+  "extension": [
+    "js",
+    "ts"
+  ],
+  "ui": "bdd",
+  "reporter": "spec",
+  "spec": [
+    "./**/*.test.ts",
+    "./**/*.spec.ts"
+  ],
+  "exit": true
+}

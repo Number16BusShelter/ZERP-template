@@ -47,10 +47,16 @@ const typeORMOptions: DataSourceOptions = {
         max: 30000,
         connectionTimeoutMillis: 4000,
     },
+    /*
+    * To get the number of available connections use
+    * > select setting::int max_conn from pg_settings where name=$$max_connections$$
+    *
+    * */
     poolSize: 64,
     // @ts-ignore
     ...(isProd ? {cache: dbConfig?.cache} : {}),
 };
+
 
 let AppDataSource = new DataSource(typeORMOptions);
 export const entityManager = new EntityManager(AppDataSource)

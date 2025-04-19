@@ -1,8 +1,9 @@
 import fs from "fs";
-import { AuthValidator, Passworder } from "../modules/Passworder";
+
 import { logger } from "../server/logger";
 import shelljs from "shelljs";
 import { dsInit } from "@zerp/db";
+import { AuthValidator } from "@/src/modules/Passworder";
 
 const outputToken = process.argv.includes("--output-token");
 const outputFilePath = "api_token.txt"; // Adjust the file path as needed

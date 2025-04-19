@@ -76,7 +76,7 @@ apt-get install node
 ### Nodemon
 ### PNPM
 
-*Set node version to 18.20 in nvm
+*Set node version to 20.18 in nvm
 
 
 ## Onboarding

@@ -1,7 +1,7 @@
 import { Router } from "express";
 import config from "../../../../config";
 import { generatePayload } from "./payload";
-import { validateTWAUser } from "../../middleware/auth/twa";
+import { validateTWAUser } from "@zerp/shared-modules/src";
 import { validateTonConnect, WalletConfig } from "@/src/modules/TonConnect/signatureVerify";
 import {
     AddressesController,
@@ -9,9 +9,9 @@ import {
     Users,
     UsersController,
 } from "@zerp/db";
-import { checkValidationResult, createValidationFor } from "src/server/middleware/validation/express";
+import { expressValidator } from "@zerp/shared-modules";
 import { TonConnectAuthFailure } from "@zerp/errors";
-import { asyncErrorHandler } from "@/src/server/common/http-handlers/handlers";
+import { asyncErrorHandler } from "@zerp/shared-modules";
 
 const router = Router();
 
@@ -38,7 +38,7 @@ const router = Router();
 router.get("/manifest.json",
     (req, res) => {
     const manifest = config.tonConnect.manifest;
-    return res.status(200).json(manifest);
+    res.status(200).json(manifest);
 });
 
 /**
@@ -62,8 +62,8 @@ router.get("/manifest.json",
  */
 
 router.post("/check-proof",
-    createValidationFor(""),
-    checkValidationResult,
+    expressValidator.createValidationFor(""),
+    expressValidator.checkValidationResult,
     ...validateTWAUser,
     asyncErrorHandler(async (req, res) => {
             const data: WalletConfig = req.body;
@@ -131,8 +131,8 @@ router.post("/check-proof",
  */
 
 router.post("/generate-payload",
-    createValidationFor(""),
-    checkValidationResult,
+    expressValidator.createValidationFor(""),
+    expressValidator.checkValidationResult,
     ...validateTWAUser,
     (req, res) => {
         res.json( {

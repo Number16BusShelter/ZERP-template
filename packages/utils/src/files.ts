@@ -25,7 +25,7 @@ export const getFileFromURL = async (fileUrl: string) => {
 
     const extension = originalName.split(".").pop() || null;
 
-    const filePath = path.resolve(dir, originalName);
+    const filePath = path.join(dir, originalName);
     if (await checkFileExists(filePath)) {
         return filePath;
     }

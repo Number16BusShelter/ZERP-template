@@ -1,7 +1,7 @@
 // controllers/BaseCRUDController.ts
 
 import { Paginate } from "@zerp/types";
-import { paginateResponse } from "@/queries";
+import { paginateResponse } from "../../queries";
 
 import { FindOptionsWhere, FindOptionsOrder, FindManyOptions, Repository, FindOneOptions } from "typeorm";
 
