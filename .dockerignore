@@ -298,6 +298,7 @@ Cargo.lock
 **/dist
 **/bin
 **/build
+**/.next
 
 # Build
 tsconfig.tsbuildinfo
@@ -305,9 +306,9 @@ tsconfig.tsbuildinfo
 .husky
 
 # Lockfiles
-**/yarn-lock.yaml
-**/pnpm-lock.yaml
-**/package-lock.yaml
+#**/yarn-lock.yaml
+#**/pnpm-lock.yaml
+#**/package-lock.yaml
 
 
 ### ZERP template
